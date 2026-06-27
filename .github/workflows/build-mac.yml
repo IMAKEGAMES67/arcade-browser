@@ -1,33 +1,39 @@
 name: Build Local Arcade Browser Mac DMG
 
 on:
-  workflow_dispatch:
+workflow_dispatch:
+
+permissions:
+contents: read
 
 jobs:
-  build:
-    runs-on: macos-latest
+build:
+runs-on: macos-latest
 
-    steps:
-      - name: Download project
-        uses: actions/checkout@v4
+```
+steps:
+  - name: Download project
+    uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24"
-          package-manager-cache: false
+  - name: Set up Node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: "24"
 
-      - name: Install packages
-        run: npm install
+  - name: Install packages
+    run: npm install
 
-      - name: Build Mac app
-        run: npm run dist:mac
+  - name: Build Mac app
+    run: npm run dist:mac -- --publish never
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
-      - name: Upload finished DMG
-        uses: actions/upload-artifact@v4
-        with:
-          name: ArcadeBrowser-V4-Mac
-          path: |
-            dist/*.dmg
-            dist/*-mac.zip
-          if-no-files-found: error
+  - name: Upload finished DMG
+    uses: actions/upload-artifact@v4
+    with:
+      name: ArcadeBrowser-V4-Mac
+      path: |
+        dist/*.dmg
+        dist/*-mac.zip
+      if-no-files-found: error
+```
