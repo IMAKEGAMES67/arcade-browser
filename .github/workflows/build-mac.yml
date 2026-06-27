@@ -1,0 +1,33 @@
+name: Build Local Arcade Browser Mac DMG
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Download project
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install packages
+        run: npm install
+
+      - name: Build Mac app
+        run: npm run dist:mac
+
+      - name: Upload finished DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArcadeBrowser-V4-Mac
+          path: |
+            dist/*.dmg
+            dist/*-mac.zip
+          if-no-files-found: error
