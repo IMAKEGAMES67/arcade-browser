@@ -1,0 +1,35 @@
+{
+  "id": "/mobile.html",
+  "name": "Arcade Browser",
+  "short_name": "ArcadeBrowser",
+  "start_url": "/mobile.html",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#07101d",
+  "theme_color": "#07101d",
+  "description": "A browser launcher and 240-game arcade for Chromebook, iPhone, iPad, and Mac.",
+  "categories": [
+    "games",
+    "entertainment",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

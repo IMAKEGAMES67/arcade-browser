@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en" data-theme="midnight">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#07101d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Arcade Browser">
+<title>Arcade Browser</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/mobile.css">
+</head>
+<body>
+<div class="app">
+  <header class="mobile-header">
+    <button class="brand brand-button" data-page-open="home"><span>AB</span><strong>Arcade Browser</strong></button>
+    <div class="header-actions">
+      <span id="appModeBadge" class="app-mode-badge">Website</span>
+      <a id="adminQuickButton" class="admin-quick hidden" href="/admin.html">Admin</a>
+      <button id="accountButton" class="account-pill">Guest</button>
+      <button id="installHelp" class="round" aria-label="Install">➕</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="page-home" class="page active">
+      <div class="welcome-row">
+        <div>
+          <p class="eyebrow">YOUR DASHBOARD</p>
+          <h1 id="welcomeTitle">Welcome!</h1>
+          <p id="welcomeSub">Browse, play, and continue where you stopped.</p>
+        </div>
+        <div class="status-pill" id="networkStatus">Online</div>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="dash-card featured" id="dailyCard">
+          <span class="dash-icon">🏆</span>
+          <div><small>DAILY CHALLENGE</small><h2 id="dailyName">Loading…</h2><p id="dailyDesc"></p></div>
+          <button id="playDaily" class="primary">Play</button>
+        </article>
+
+        <article class="dash-card" id="continueCard">
+          <span class="dash-icon">▶️</span>
+          <div><small>CONTINUE PLAYING</small><h3 id="continueName">Choose a game</h3><p id="continueDesc">Your last game appears here.</p></div>
+          <button id="continuePlay">Open</button>
+        </article>
+
+        <article class="dash-card">
+          <span class="dash-icon">🏅</span>
+          <div><small>ACHIEVEMENTS</small><h3><span id="achievementCount">0</span> unlocked</h3><p id="achievementHint">Play a game to begin.</p></div>
+          <button data-page-open="profile">View</button>
+        </article>
+
+        <article class="dash-card">
+          <span class="dash-icon">📴</span>
+          <div><small>OFFLINE READY</small><h3 id="offlineTitle">Checking…</h3><p>Built-in games work without internet after the first load.</p></div>
+          <button id="refreshOffline">Refresh</button>
+        </article>
+      </div>
+
+
+<section id="membershipHomeCard" class="content-block membership-home">
+  <div class="block-head">
+    <div>
+      <p class="eyebrow">ARCADE PLUS</p>
+      <h2 id="membershipHomeTitle">Remove all ads</h2>
+      <p id="membershipHomeText">Membership works on every device signed into your account.</p>
+    </div>
+    <button id="membershipHomeButton" data-page-open="business">See membership</button>
+  </div>
+</section>
+
+<section id="sponsoredSection" class="content-block hidden">
+  <div class="block-head">
+    <div><p class="eyebrow">SPONSORED</p><h2>Advertisements</h2></div>
+    <button data-page-open="business">Advertise here</button>
+  </div>
+  <div id="activeAds" class="ads-grid"></div>
+</section>
+
+      <section class="content-block">
+        <div class="block-head"><div><h2>Favorite websites</h2><p>Saved shortcuts</p></div><button data-page-open="browser">Add one</button></div>
+        <div id="favoriteSitesHome" class="site-list"></div>
+      </section>
+
+      <section class="content-block">
+        <div class="block-head"><div><h2>Recent websites</h2><p>Your latest visits</p></div><button id="clearRecent">Clear</button></div>
+        <div id="recentSitesHome" class="site-list"></div>
+      </section>
+
+      <section id="liveUpdateCard" class="content-block hidden">
+        <div class="block-head"><div><p class="eyebrow">PUBLISHED BY ADMIN</p><h2 id="liveUpdateTitle">Latest update</h2></div><a href="/custom.html">Full screen</a></div>
+        <iframe id="liveUpdateFrame" class="safe-update-frame" title="Admin published update" sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock"></iframe>
+      </section>
+    </section>
+
+    <section id="page-browser" class="page">
+      <div class="section-top">
+        <div><h1>Browser</h1><p>Tabs, favorites, and history</p></div>
+        <button id="newTab" class="icon-button">＋</button>
+      </div>
+
+      <div class="tabs-shell">
+        <div id="tabStrip" class="tab-strip"></div>
+      </div>
+
+      <div class="browser-card">
+        <label for="address">Search or enter website</label>
+        <div class="address-row">
+          <input id="address" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="example.com or search words">
+          <button id="tryInside">Go</button>
+        </div>
+        <div class="browser-actions">
+          <button id="openBrowser">Open in browser</button>
+          <button id="favoriteSite">☆ Favorite</button>
+          <button id="clearViewer">Clear</button>
+        </div>
+        <p class="browser-note">Some websites block embedded viewing. Use “Open in browser” when that happens.</p>
+      </div>
+
+      <div class="quick-links">
+        <button data-url="https://duckduckgo.com">🔎<span>DuckDuckGo</span></button>
+        <button data-url="https://www.wikipedia.org">📚<span>Wikipedia</span></button>
+        <button data-url="https://itch.io/games/html5">🕹️<span>HTML5 Games</span></button>
+        <button data-url="https://www.youtube.com">▶️<span>YouTube</span></button>
+      </div>
+
+      <div id="viewerWrap" class="viewer hidden">
+        <div class="viewer-top">
+          <span id="viewerStatus">Loading…</span>
+          <button id="viewerExternal">Open in browser</button>
+        </div>
+        <iframe id="viewer" title="Website viewer" sandbox="allow-scripts allow-forms allow-same-origin allow-popups"></iframe>
+        <div id="viewerError" class="viewer-error hidden">
+          <div>
+            <span>⚠️</span>
+            <h3>This website may block in-app viewing</h3>
+            <p>Try again, open it in your browser, or go back.</p>
+            <div><button id="retryViewer">Try again</button><button id="errorExternal">Open in browser</button><button id="errorBack">Go back</button></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="content-block compact">
+        <div class="block-head"><div><h2>Saved sites</h2><p>Tap to open</p></div></div>
+        <div id="favoriteSitesBrowser" class="site-list"></div>
+      </section>
+    </section>
+
+    <section id="page-games" class="page">
+      <div class="section-top">
+        <div><h1>Games</h1><p>12 original games with different mechanics</p></div>
+        <input id="gameSearch" placeholder="Search games">
+      </div>
+      <div id="categories" class="categories"></div>
+      <div id="gameGrid" class="game-grid"></div>
+    </section>
+
+
+<section id="page-business" class="page">
+  <div class="section-top">
+    <div><h1>Membership & Advertising</h1><p>Go ad-free or create a sponsored campaign</p></div>
+    <span id="businessAppBadge" class="status-pill">Website</span>
+  </div>
+
+  <section class="business-grid">
+    <article class="business-card membership-card">
+      <p class="eyebrow">ARCADE PLUS</p>
+      <h2>No advertisements</h2>
+      <p>Your membership follows your Supabase account across the website and installed app.</p>
+      <div id="membershipStatus" class="membership-status">Log in to check membership.</div>
+      <button id="buyMembership" class="primary wide">Join Arcade Plus</button>
+    </article>
+
+    <article class="business-card">
+      <p class="eyebrow">ADVERTISING</p>
+      <h2>Create a campaign</h2>
+      <p>Anyone with an account can buy an ad. Ads must be approved by Adam before they appear.</p>
+
+      <label>Advertising package
+        <select id="adPackage">
+          <option value="">Loading packages…</option>
+        </select>
+      </label>
+
+      <div id="adOptionInfo" class="ad-option-info">The admin has not configured this option yet.</div>
+
+      <label>Ad title
+        <input id="adTitle" maxlength="80" placeholder="Your website or project">
+      </label>
+
+      <label>Description
+        <textarea id="adDescription" maxlength="220" placeholder="A short description"></textarea>
+      </label>
+
+      <label>Destination URL
+        <input id="adDestination" type="url" placeholder="https://example.com">
+      </label>
+
+      <label>Image URL (optional)
+        <input id="adImage" type="url" placeholder="https://example.com/image.png">
+      </label>
+
+      <button id="buyAd" class="primary wide">Continue to Stripe Checkout</button>
+      <p id="businessMessage" class="form-message"></p>
+    </article>
+  </section>
+
+  <section class="content-block">
+    <div class="block-head"><div><h2>Your advertising campaigns</h2><p>Payments and approval status</p></div><button id="refreshCampaigns">Refresh</button></div>
+    <div id="myCampaigns" class="campaign-list"></div>
+  </section>
+</section>
+
+
+    <section id="page-profile" class="page">
+      <div class="section-top"><div><h1>Profile</h1><p>Account, sync, and achievements</p></div></div>
+
+      <div id="authSignedOut" class="profile-card">
+        <div class="profile-icon">👤</div>
+        <h2>Create or log into an account</h2>
+        <p>The owner account becomes <b>adam</b> when its email matches the email placed in the Supabase SQL.</p>
+        <div class="form-grid">
+          <label>Username<input id="authUsername" placeholder="Your username"></label>
+          <label>Email<input id="authEmail" type="email" placeholder="you@example.com"></label>
+          <label>Password<input id="authPassword" type="password" minlength="6" placeholder="At least 6 characters"></label>
+        </div>
+        <div class="button-row">
+          <button id="signUpButton" class="primary">Create account</button>
+          <button id="loginButton">Log in</button>
+        </div>
+        <p id="authMessage" class="form-message"></p>
+      </div>
+
+      <div id="authSignedIn" class="profile-card hidden">
+        <div class="profile-top">
+          <div class="profile-avatar" id="profileAvatar">A</div>
+          <div><h2 id="profileName">Player</h2><p id="profileRole">User</p></div>
+        </div>
+        <div class="profile-actions">
+          <button id="syncUp">Save data to account</button>
+          <button id="syncDown">Load account data</button>
+          <a id="adminLink" class="admin-link hidden" href="/admin.html">🛠️ Open Admin Studio</a>
+          <button id="logoutButton" class="danger-soft">Log out</button>
+        </div>
+        <p id="syncMessage" class="form-message"></p>
+      </div>
+
+      <section class="content-block">
+        <div class="block-head"><div><h2>Achievements</h2><p>Unlocked on this device</p></div></div>
+        <div id="achievementGrid" class="achievement-grid"></div>
+      </section>
+
+      <section class="content-block">
+        <div class="block-head"><div><h2>Favorite games</h2><p>Your starred arcade games</p></div></div>
+        <div id="favoriteGrid" class="game-grid"></div>
+      </section>
+    </section>
+
+    <section id="page-settings" class="page">
+      <div class="section-top"><div><h1>Settings</h1><p>Customize Arcade Browser</p></div></div>
+      <div class="settings-card">
+        <label>Theme
+          <select id="themeSelect">
+            <option value="midnight">Midnight</option>
+            <option value="light">Light</option>
+            <option value="sunset">Sunset</option>
+            <option value="forest">Forest</option>
+          </select>
+        </label>
+        <label>Search engine
+          <select id="engine">
+            <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+            <option value="https://www.google.com/search?q=">Google</option>
+            <option value="https://www.bing.com/search?q=">Bing</option>
+          </select>
+        </label>
+        <button id="showSetup">Show first-time setup</button>
+        <button id="showInstall">Install app instructions</button>
+        <button id="clearData" class="danger">Clear favorites, history, achievements, and scores</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="active" data-page="home">🏠<span>Home</span></button>
+    <button data-page="browser">🌐<span>Browser</span></button>
+    <button data-page="games">🎮<span>Games</span></button>
+    <button data-page="business">💳<span>Business</span></button>
+    <button data-page="profile">👤<span>Profile</span></button>
+    <button data-page="settings">⚙️<span>Settings</span></button>
+  </nav>
+</div>
+
+<div id="setupModal" class="modal hidden">
+  <div class="sheet">
+    <button id="closeSetup" class="close">✕</button>
+    <div class="big-icon">👋</div>
+    <p class="eyebrow">FIRST-TIME SETUP</p>
+    <h2>Welcome to Arcade Browser</h2>
+    <p id="setupDeviceText">Your device is ready.</p>
+    <div class="setup-options">
+      <button data-setup-theme="midnight">🌙 Midnight</button>
+      <button data-setup-theme="light">☀️ Light</button>
+      <button data-setup-theme="sunset">🌅 Sunset</button>
+      <button data-setup-theme="forest">🌲 Forest</button>
+    </div>
+    <button id="finishSetup" class="primary wide">Finish setup</button>
+  </div>
+</div>
+
+<div id="installModal" class="modal hidden">
+  <div class="sheet">
+    <button id="closeInstall" class="close">✕</button>
+    <div class="big-icon">➕</div>
+    <h2>Install Arcade Browser</h2>
+    <div id="iosInstallText">
+      <p>In Chrome or Safari on iPhone/iPad, tap <b>Share</b>, scroll down, and choose <b>Add to Home Screen</b>.</p>
+    </div>
+    <div id="chromeInstallText" class="hidden">
+      <p>On Chromebook, press the install button in Chrome or use Chrome’s menu and choose <b>Install page as app</b>.</p>
+      <button id="promptInstall" class="primary wide">Install now</button>
+    </div>
+    <p class="small">After installation, open it from your app launcher or Home Screen.</p>
+  </div>
+</div>
+
+<div id="gameModal" class="modal hidden">
+  <div class="game-sheet">
+    <div class="game-head">
+      <strong id="gameTitle">Game</strong>
+      <div><button id="favBtn">☆</button><button id="restartBtn">↻</button><button id="closeGame">✕</button></div>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="canvas" width="960" height="540"></canvas>
+      <div id="overlay" class="overlay"><div><h2>Ready?</h2><p>Tap to start</p></div></div>
+    </div>
+    <div class="hud">
+      <span>Score <b id="score">0</b></span>
+      <span>Best <b id="best">0</b></span>
+      <span>Time <b id="time">30.0</b></span>
+    </div>
+    <div id="controls" class="controls">Tap to play</div>
+  </div>
+</div>
+
+
+<div id="sponsorModal" class="modal hidden">
+  <div class="sponsor-sheet">
+    <button id="closeSponsor" class="sponsor-close" disabled>✕</button>
+    <div class="sponsored-label">SPONSORED</div>
+    <img id="sponsorImage" class="sponsor-image hidden" alt="">
+    <h2 id="sponsorTitle">Sponsored</h2>
+    <p id="sponsorDescription"></p>
+    <a id="sponsorVisit" class="primary wide" target="_blank" rel="noopener noreferrer sponsored">Visit sponsor</a>
+    <small id="sponsorCountdown">Close button unlocking…</small>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
+<script src="/mobile.js"></script>
+</body>
+</html>

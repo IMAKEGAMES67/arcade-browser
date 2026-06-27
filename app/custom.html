@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07101d">
+<title>Arcade Browser Live Update</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0;background:#07101d;font-family:system-ui;color:#fff}
+header{height:58px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1)}
+header a{color:#fff;text-decoration:none;font-weight:800}header strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+iframe{display:block;width:100%;height:calc(100% - 58px);border:0;background:#fff}
+</style>
+</head>
+<body>
+<header><a href="/mobile.html">← Arcade Browser</a><strong id="publicUpdateTitle">Live update</strong></header>
+<iframe id="publicUpdateFrame" title="Published update" sandbox="allow-scripts allow-forms allow-modals allow-pointer-lock"></iframe>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
+<script src="/public-update.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+window.ARCADE_SUPABASE_URL = "https://dpriiurkbznwutyxppcw.supabase.co";
+window.ARCADE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRwcmlpdXJrYnpud3V0eXhwcGN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3ODQ1ODcsImV4cCI6MjA5NDM2MDU4N30.DyVwzEa5AG-Uvpo5qh9grFSUOxFRdzLLd4gYGfUQQfU";
